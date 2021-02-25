@@ -7,13 +7,6 @@
 #include <math.h>
 
 
-struct Complex{
-    float re,im;
-    Complex(float r, float i){
-        re = r;
-        im = i;
-    }
-};
 
 class Circle{
 public:

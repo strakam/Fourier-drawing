@@ -18,14 +18,15 @@ class Machine{
     float time = 0, pi = 3.1415926535879, time_increment;
     Complex center, center_x, center_y;
 
-    vector<Complex> dft(const vector<float> &v);
+    vector<Complex> dft(const vector<Complex> &v, bool real);
     void make_circles();
 public:
     sw::Spline path;
     vector<Complex> pic;
-    Machine(const vector<float> &x, const vector<float> &y, sf::RenderWindow* w);
+    Machine(const vector<Complex> &v, sf::RenderWindow* w);
     void draw_machine();    
     void update_circles();
+    void set_drawing_properties();
 };
 
 #endif
