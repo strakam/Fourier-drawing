@@ -11,5 +11,5 @@
 #include <math.h>
 #include <utility>
 #include <vector>
-
+#include "nanosvg.h"
 #endif

@@ -1,4 +1,6 @@
+#include <SFML/Graphics/Color.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
+#include <SFML/System/Vector2.hpp>
 #include <bits/stdc++.h>
 #include "machine.h"
 
@@ -15,6 +17,11 @@ Machine::Machine(const vector<float> &x,
     coefficients_x = dft(x);
     coefficients_y = dft(y);
     make_circles();
+    path.setInterpolationSteps(20u);
+    path.setThickness(3);
+    path.setThickCornerType(sw::Spline::ThickCornerType::Round);
+    path.setBezierInterpolation(true);
+    path.setColor(sf::Color(255, 142, 122));
 }
 
 vector<Complex> Machine::dft(const vector<float> &v){
@@ -63,10 +70,6 @@ void Machine::update_circles(){
         px = circles_x[i]->update(time, px);
         py = circles_y[i]->update(time, py);
     }
-    sf::Vertex v(sf::Vector2f(circles_x[N-1]->x, circles_y[N-1]->y), sf::Color::White);
-    path.push_back(v);
+    path.addVertex(sf::Vector2f(circles_x[N-1]->x, circles_y[N-1]->y));
     time += time_increment;
-    if(time > 2*pi){
-        time = 0; path.clear();
-    }
 }

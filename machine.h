@@ -4,6 +4,7 @@
 #include "circle.h"
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/System/Vector2.hpp>
+#include "Spline.hpp"
 
 using namespace std;
 
@@ -20,7 +21,7 @@ class Machine{
     vector<Complex> dft(const vector<float> &v);
     void make_circles();
 public:
-    vector<sf::Vertex> path;
+    sw::Spline path;
     vector<Complex> pic;
     Machine(const vector<float> &x, const vector<float> &y, sf::RenderWindow* w);
     void draw_machine();    
