@@ -6,12 +6,12 @@ class Parser{
     NSVGimage* image;
     NSVGshape* shape;
     NSVGpath* path;
-    std::vector<Complex> points;
+    std::vector<std::vector<Complex>> points;
 public:
     Parser(const char* filename);
     void bezierize();
     void centralize_picture();
-    std::vector<Complex> get_points();
+    std::vector<std::vector<Complex>> get_points();
 };
 
 #endif

@@ -13,7 +13,7 @@ Machine::Machine(const std::vector<Complex>& points, sf::RenderWindow* w, bool f
     :fancy(fancy), center(300, 300){
     window = w;
     N = points.size();
-    time_increment = 2*pi/(N);
+    time_increment = 2*pi/N;
     fader = 2*N/255;
     coefficients_x = dft(points, true);
     coefficients_y = dft(points, false);
@@ -72,8 +72,8 @@ void Machine::update_circles(){
         position = circles[i]->update(time, position);
     path.push_back({sf::Vector2f(circles[2*N-1]->tip.re, circles[2*N-1]->tip.im), sf::Color(255,142,122,255)});
     // Fade
-    if(fancy) fancy_fade();
-    else slow_fade();
+    /* if(fancy) fancy_fade(); */
+    /* else slow_fade(); */
     if(time > 2*pi)
         time = 0;
     // Cleanup transparent vertices
