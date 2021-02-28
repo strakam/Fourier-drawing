@@ -1,0 +1,7 @@
+#!/bin/bash
+set -euo pipefail
+
+g++ -c src/main.cpp src/circle.cpp src/machine.cpp src/path_parser.cpp && \
+g++ main.o circle.o machine.o path_parser.o -o fourier-app -lsfml-graphics \
+-lsfml-window -lsfml-system
+rm *.o
