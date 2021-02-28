@@ -6,23 +6,12 @@
 #include <cmath>
 #include <math.h>
 
-
-
 class Circle{
 public:
     float radius, freq, phase;
-    float x, y, center_x, center_y;
-    sf::CircleShape circle, tip;
-    Circle(Complex num, float frequency, float rotation) : freq(frequency){
-        radius = sqrt(num.re*num.re + num.im*num.im);
-        phase = std::atan2(num.im, num.re) + rotation;
-        circle.setRadius(radius);
-        circle.setOutlineColor(sf::Color::White);
-        circle.setFillColor(sf::Color(255, 255,255,0));
-        circle.setOutlineThickness(1.f);
-        /* tip.setFillColor(sf::Color::White); */
-        tip.setRadius(2);
-    }
+    Complex center, tip;
+    sf::CircleShape circle, tip_circle;
+    Circle(Complex num, float frequency, float rotation);
     Circle(){}
 
     Complex update(float time, Complex position);

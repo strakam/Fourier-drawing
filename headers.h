@@ -12,16 +12,13 @@
 #include <utility>
 #include <vector>
 #include "nanosvg.h"
+#include <getopt.h>
 
 
 struct Complex{
-    float re,im;
-    Complex(float r, float i){
-        re = r;
-        im = i;
-    }
-    Complex(){
-
-    };
+    float re, im;
+    Complex(float r, float i): re(r), im(i){}
+    Complex(){}
 };
+
 #endif

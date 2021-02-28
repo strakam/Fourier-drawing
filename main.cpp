@@ -11,49 +11,41 @@
 
 using namespace sf;
 
-int main() {
+int main(int argc, char *argv[]) {
     sf::RenderWindow window(sf::VideoMode(1920, 1080), "Fourier Drawing");
-    vector<float> vx, vy;
-    /* float f; */
-    /* ifstream inputx("xs"); */
-    /* ifstream inputy("ys"); */
-    /* int counter = 0; */
-    /* string s; */
-    /* while(getline(inputx, s)){ */
-    /*     f = stof(s); */
-    /*     if(counter % 10 == 0) */
-    /*         vx.push_back(f); */
-    /*     counter++; */
-    /* } */
-    /* while(getline(inputy, s)){ */
-    /*     f = stof(s); */
-    /*     if(counter % 10 == 0) */
-    /*         vy.push_back(f); */
-    /*     counter++; */
-    /* } */
-    /* ifstream input("coords"); */
-    /* int x = 0; */
-    /* while(input >> f){ */
-    /*     cout << f << endl; */
-    /*     if(x%2) vy.push_back(f); */
-    /*     else vx.push_back(f); */
-    /*     x++; */
-    /* } */
-    Parser parser("fourier.svg");
-    parser.bezierize();
-    parser.centralize_picture();
-    Machine fourier(parser.get_points(), &window);
+    sf::ContextSettings settings;
+    settings.antialiasingLevel = 8;
+    char opt;
+    bool bezierize = false, fancy = true;
+    while((opt = getopt(argc, argv, "fbc:l:")) != -1){
+        switch (opt) {
+            case 'b':
+                bezierize = true;
+                break;
+            case 'g':
+                break;
+            case 'f':
+                fancy = true;
+                break;
+        }
+    }
+    std::string filename = "woman.svg";
+    /* if(optind > 0) */
+    /*     filename = argv[optind]; */
+    Parser parser(&filename[0]);
+    if(bezierize)
+        parser.bezierize();
+    /* parser.centralize_picture(); */
+    Machine fourier(parser.get_points(), &window, fancy);
+
     while (window.isOpen()){
         sf::Event event;
         while (window.pollEvent(event))
             if (event.type == sf::Event::Closed)
                 window.close();
-
         window.clear();
         fourier.update_circles();
         fourier.draw_machine();
-        fourier.path.update();
-        window.draw(fourier.path);
         window.display();
     }
     return 0;
